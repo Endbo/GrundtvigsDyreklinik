@@ -1,0 +1,20 @@
+﻿
+
+@{
+    ViewBag.Title = "Success";
+}
+
+@{
+    if (String.IsNullOrEmpty(ViewBag.successMessage))
+    {
+        <h1 class="text-info">Something wrong.</h1>
+        <h2 class="text-info">Allt gick daligt</h2>
+
+    }
+    else
+    {
+        <h1 class="text-info">Success.</h1>
+        <h2 class="text-info">@ViewBag.successMessage</h2>
+    }
+}
+

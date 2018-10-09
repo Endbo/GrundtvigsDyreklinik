@@ -1,0 +1,63 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+     background: linear-gradient(#ffffff, rgba(0, 0, 0, 0.7)), url('../profilePic/bacground3.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment:fixed; 
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*sliceImage*/
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img 
+{
+    width: 50%;
+    height:170px;
+    margin: auto;
+}
+
+.imgslice{
+    padding:0px 0 20px 0px;
+    
+}
+
+/*Navigation Style*/
+
+
+.navbar{
+    background-color: #437365 !important;
+    text-transform: uppercase;
+    font-family: 'PT Sans Narrow',Arial,sans-serif;
+    font-weight: 700;
+    position: fixed !important;
+}
+.navbar a{
+    color:#fff !important;
+    opacity:2;
+
+}
+.navbar a:hover{
+    opacity:0.5;
+    background-color: #437365 !important;
+}

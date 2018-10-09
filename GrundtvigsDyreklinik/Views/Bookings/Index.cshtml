@@ -1,0 +1,139 @@
+﻿@model GrundtvigsDyreklinik.Models.Booking
+
+@{
+    ViewBag.Title = "Booking Index";
+
+}
+
+<div class="row"align="right">
+    <div class="col-lg-1 col-md-1 col-lg-offset-11 col-md-offset-11">
+        <div style="position:fixed">
+
+            @if (Model != null && Model.ApplicationUser != null)
+            {
+                if (!String.IsNullOrEmpty(Model.ApplicationUser.ProfileImage.ToString()))
+                {
+                    <img src="@Model.ApplicationUser.ProfileImage" class="img-circle img-rounded" height="110" width="110" />
+                }
+                else
+                {
+                    <img src="~/profilePic/userImg.png" class="img-circle img-rounded" height="130" width="130" />
+                }
+            }
+            
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br />
+<h2>Booking</h2>
+
+@using (Html.BeginForm())
+{
+<div class="form-horizontal" style="float:left">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PetID, htmlAttributes: new { @class = "control-label col-md-2 " })
+            <div class="col-md-8 col-md-offset-2">
+                @Html.DropDownList("PetID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PetID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+   
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreatmentID, htmlAttributes: new { @class = "control-label col-md-2" })            
+            <div class="col-md-8 col-md-offset-2">
+                @Html.DropDownList("TreatmentID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TreatmentID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    
+    <div id='datepicker'></div>
+    <br />
+    <div>
+        <div style="float:left">&nbsp;</div>
+        <input type="button" class="btn btn-default" value="Add"id="add" />
+    </div>
+
+</div>
+
+<div id='calendar' style="float:right; width:750px"> </div>
+<div>&nbsp;</div>
+<div style="clear:both">&nbsp;</div>
+
+
+}
+<div id="DetailModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTreatment"></span></h4>
+            </div>
+            <div class="modal-body">
+                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>Remove
+                </button>
+                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                    <span class="glyphicon glyphicon-pencil"></span>Edit
+                </button>
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*//SaveModalPopup*@
+<div id="EditSaveModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Bookings</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.ID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TreatmentID, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownList("TreatmentID", null, htmlAttributes: new { @id = "tid", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TreatmentID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PetID, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownList("PetID", null, htmlAttributes: new { @id = "pid", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PetID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div id='StartTime'></div>
+                        </div>
+                    </div>
+                    <button type="button" id="btnEditSave" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var userName = '@HttpContext.Current.User.Identity.Name';
+</script>
+
+@section Scripts {
+
+        @Scripts.Render("~/Scripts/CustomJs/BookingsCalendar.js")
+    
+    }
